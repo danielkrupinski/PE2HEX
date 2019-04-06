@@ -1,6 +1,8 @@
-file = bytearray(open('input.dll', 'rb').read())
+import sys
 
-output = open('output.txt', 'w')
+file = bytearray(open(sys.argv[1], 'rb').read())
+
+output = open(sys.argv[2], 'w')
 output.write('static const uint8_t binary[]{\n')
 
 byteCount = 0
