@@ -12,7 +12,7 @@ output.write('static const uint8_t binary[]{\n')
 byteCount = 0
 
 for byte in file:
-    output.write(hex(byte) + ', ')
+    output.write(f'{byte:#0{4}x}, ')
     byteCount += 1
     if byteCount == 16:
         output.write('\n')
