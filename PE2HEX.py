@@ -1,11 +1,15 @@
-import sys
+import argparse
 
-if len(sys.argv) < 2:
-    print('Usage: PE2HEX input_filename [output_filename]\nExample: PE2HEX input.dll output.txt')
-    exit(1)
+parser = argparse.ArgumentParser(
+    description='PE2HEX - PE executable to byte array converter')
+parser.add_argument('input', type=str,
+                    help='Input PE filename or full path')
+parser.add_argument('--out', default='output.txt', type=str,
+                    help='Output filename or full path')
 
-file = bytearray(open(sys.argv[1], 'rb').read())
+args = parser.parse_args()
+file = bytearray(open(args.input, 'rb').read())
 
-with open(sys.argv[2] if len(sys.argv) >= 3 else 'output.txt', 'w') as output:
+with open(args.out, 'w') as output:
     for count, byte in enumerate(file, 1):
         output.write(f'{byte:#0{4}x},' + ('\n' if not count % 16 else ' '))
